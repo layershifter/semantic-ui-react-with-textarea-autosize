@@ -7,8 +7,7 @@ import {
   Form,
   Header,
   Message,
-  Segment,
-  TextArea
+  Segment
 } from "semantic-ui-react";
 
 class App extends React.Component {
@@ -30,13 +29,34 @@ class App extends React.Component {
             and shows how you can use it with Semantic UI React.
           </Message.Content>
         </Message>
+
+        <Segment>
+          <Header as="h3">
+            Controlled mode with <code>{`<Form />`}</code>
+          </Header>
+          <Form>
+            <Form.Field
+              control={TextareaAutosize}
+              label="About"
+              placeholder="Tell us more about you..."
+              onChange={(e, data) => this.setState({ value: data.value })}
+              useCacheForDOMMeasurements
+              value={this.state.value}
+            />
+
+            <Form.Button
+              content="Clear"
+              onClick={() => this.setState({ value: "" })}
+            />
+          </Form>
+        </Segment>
+
         <Segment.Group>
           <Segment as={Form}>
             <Header as="h3">
               Textarea with <code>maxRows</code> and <code>minRows</code>
             </Header>
-            <TextArea
-              as={TextareaAutosize}
+            <TextareaAutosize
               minRows={3}
               maxRows={6}
               defaultValue="Just a single line..."
@@ -47,8 +67,7 @@ class App extends React.Component {
               Textarea with <code>maxRows</code> and <code>minRows</code> (
               <code>box-sizing: border-box</code>)
             </Header>
-            <TextArea
-              as={TextareaAutosize}
+            <TextareaAutosize
               defaultValue="Just a single line..."
               minRows={3}
               maxRows={6}
@@ -68,8 +87,7 @@ class App extends React.Component {
             <Header as="h3">
               Textarea with <code>maxHeight</code>
             </Header>
-            <TextArea
-              as={TextareaAutosize}
+            <TextareaAutosize
               defaultValue="Just a single line..."
               style={{ maxHeight: 300 }}
             />
@@ -78,38 +96,12 @@ class App extends React.Component {
             <Header as="h3">
               Component with <code>rows</code> set
             </Header>
-            <TextArea
-              as={TextareaAutosize}
-              defaultValue="Just a single line..."
-              rows={4}
-            />
-          </Segment>
-          <Segment>
-            <Header as="h3">
-              Controlled mode with <code>{`<Form />`}</code>
-            </Header>
-            <Form>
-              <Form.Field>
-                <TextArea
-                  as={TextareaAutosize}
-                  label="About"
-                  placeholder="Tell us more about you..."
-                  onChange={(e, data) => this.setState({ value: data.value })}
-                  useCacheForDOMMeasurements
-                  value={this.state.value}
-                />
-              </Form.Field>
-              <Form.Button
-                content="Clear"
-                onClick={() => this.setState({ value: "" })}
-              />
-            </Form>
+            <TextareaAutosize defaultValue="Just a single line..." rows={4} />
           </Segment>
           <Segment as={Form}>
             <Header as="h3">Receive message on height change</Header>
 
-            <TextArea
-              as={TextareaAutosize}
+            <TextareaAutosize
               defaultValue="Just a single line..."
               onHeightChange={(height, instance) =>
                 console.log(height, instance.rowCount)
